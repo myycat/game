@@ -7,6 +7,9 @@ snake[0] = {
     y: 8 * box
 }
 
+
+let direction = "right"; /*Criar o movimento da cobrinha*/
+
 function criarBg(){
     context.fillStyle = "lightgreen";
     context.fillRect(0, 0, 16 * box, 16 * box);
@@ -19,5 +22,29 @@ function criarCobrinha(){
     }
 }
 
-criarBg();
-criarCobrinha();
+function iniciarJogo(){
+    criarBg();
+    criarCobrinha();  
+    
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    /*Cordenadas de aumentar e diminuir*/
+    if(direction == "right") snakeX += box;
+    if(direction == "left") snakeX -= box;
+    if(direction == "up") snakeY -= box;
+    if(direction == "down") snakeY -= box;
+
+    snake.pop(); /*Retira o ultimo elemento do array */
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+    
+}
+
+let jogo = setInterval(iniciarJogo, 100);
+
